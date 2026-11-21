@@ -1,3 +1,8 @@
 {
-	"Taski.Services.Title": "Taski Services"
+	"Taski.Services.Title": "Taski Services",
+	"Taski.Services.Welcome": "Welcome",
+	"Taski.Services.LoginPage.Username": "Username",
+	"Taski.Services.LoginPage.Password": "Password",
+	"Taski.Services.LoginPage.RememberMe": "Remember me",
+	"Taski.Services.LoginPage.SignIn": "Sign in"
 }
