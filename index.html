@@ -1,15 +1,340 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="sr">
 	<head>
-		<meta charset="utf-8">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Taski Usluge</title>
+		<link rel="icon" href="app/favicon.ico">
+		<style>
+			:root
+			{
+				--primary: #d6001c;
+				--primary-dark: #b30018;
+				--text: #2d3748;
+				--muted: #718096;
+				--background: #f8fafc;
+				--shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+				--radius: 24px;
+			}
+
+			*
+			{
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			html, body
+			{
+				min-height: 100%;
+			}
+
+			body
+			{
+				font-family: "Segoe UI", Roboto, Arial, sans-serif;
+				background: var(--background);
+				color: var(--text);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 32px;
+				overflow-x: hidden;
+			}
+
+			.background-animation
+			{
+				position: fixed;
+				inset: 0;
+				z-index: -1;
+
+				background:
+					radial-gradient(circle at 15% 20%, rgba(148, 163, 184, 0.16), transparent 42%),
+					radial-gradient(circle at 85% 75%, rgba(203, 213, 225, 0.20), transparent 45%),
+					radial-gradient(circle at 70% 15%, rgba(226, 232, 240, 0.30), transparent 35%);
+
+				animation: floatBackground 24s ease-in-out infinite alternate;
+			}
+
+			.container
+			{
+				width: 100%;
+				max-width: 1100px;
+			}
+
+			.panel
+			{
+				background: rgba(255, 255, 255, 0.78);
+				backdrop-filter: blur(16px);
+				-webkit-backdrop-filter: blur(16px);
+				border: 1px solid rgba(255, 255, 255, 0.5);
+				border-radius: var(--radius);
+				overflow: hidden;
+				box-shadow: var(--shadow);
+			}
+
+			.hero
+			{
+				padding: 56px 32px 40px;
+				text-align: center;
+			}
+
+			.hero::after
+			{
+				content: "";
+				display: block;
+				width: 120px;
+				height: 1px;
+				margin: 32px auto 0;
+				background: rgba(0, 0, 0, 0.08);
+			}
+
+			.logo
+			{
+				display: block;
+				width: 100%;
+				max-width: 320px;
+				height: auto;
+				margin: 0 auto 28px auto;
+			}
+
+			h1
+			{
+				font-size: clamp(2.2rem, 4vw, 3.2rem);
+				margin-bottom: 12px;
+			}
+
+			.subtitle
+			{
+				max-width: 720px;
+				margin: 0 auto;
+				color: var(--muted);
+				font-size: 1.1rem;
+				line-height: 1.6;
+			}
+
+			.cards
+			{
+				padding: 0 32px 48px;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+				gap: 24px;
+			}
+
+			.card
+			{
+				position: relative;
+				background: rgba(255, 255, 255, 0.72);
+				backdrop-filter: blur(12px);
+				-webkit-backdrop-filter: blur(12px);
+				border-radius: 20px;
+				border: 1px solid rgba(255, 255, 255, 0.45);
+				padding: 30px;
+				text-decoration: none;
+				color: inherit;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+				animation: fadeInUp .8s ease both;
+			}
+
+			.card:nth-child(2)
+			{
+				animation-delay: .1s;
+			}
+
+			.card:nth-child(3)
+			{
+				animation-delay: .2s;
+			}
+
+			.card::before
+			{
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 4px;
+				background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+				opacity: 0;
+				transition: opacity .25s ease;
+			}
+
+			.card:hover
+			{
+				transform: translateY(-8px) scale(1.02);
+				border-color: rgba(214, 0, 28, 0.25);
+				box-shadow: 0 24px 45px rgba(0, 0, 0, 0.15);
+			}
+
+			.card:hover::before
+			{
+				opacity: 1;
+			}
+
+			.icon
+			{
+				width: 72px;
+				height: 72px;
+				margin-bottom: 18px;
+				border-radius: 18px;
+				background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				flex-shrink: 0;
+
+				transition: transform .25s ease, box-shadow .25s ease;
+			}
+
+			.card:hover .icon
+			{
+				transform: scale(1.07);
+			}
+
+			.icon svg
+			{
+				width: 38px;
+				height: 38px;
+				fill: currentColor;
+			}
+
+			.card h2
+			{
+				font-size: 1.4rem;
+				margin-bottom: 10px;
+			}
+
+			.card p
+			{
+				color: var(--muted);
+				line-height: 1.5;
+				margin-bottom: 24px;
+			}
+
+			.button
+			{
+				margin-top: auto;
+				padding: 12px 24px;
+				border-radius: 999px;
+				color: white;
+				font-weight: 600;
+				background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+				transition: transform .2s ease, box-shadow .2s ease;
+			}
+
+			.card:hover .button
+			{
+				box-shadow: 0 8px 20px rgba(214, 0, 28, 0.25);
+			}
+
+			.footer
+			{
+				text-align: center;
+				padding: 0 20px 36px;
+				color: var(--muted);
+				font-size: .95rem;
+			}
+
+			@keyframes fadeInUp
+			{
+				from { opacity: 0; transform: translateY(25px); }
+				to { opacity: 1; transform: translateY(0); }
+			}
+
+			@keyframes floatBackground
+			{
+				from { transform: translate(0, 0); }
+				to { transform: translate(-60px, -35px); }
+			}
+
+			@media (max-width: 640px)
+			{
+				body { padding: 20px; }
+				.hero { padding: 40px 24px 32px; }
+				.cards { padding: 0 24px 32px; }
+				.logo { max-width: 250px; }
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Dobrodošli u Taski Servis</h1>
-		<ul>
-			<li>Preuzmite aplikaciju za <a href="https://github.com/taski1995/taski1995.github.io/raw/refs/heads/main/installer/TaskiUsluge_Installer_Win32-x64.exe">Windows</a></li>
-			<li>Preuzmite aplikaciju za <a href="installer/TaskiUsluge_Installer_Android.apk">Android</a></li>
-			<li>Otvorite <a href="app">web aplikaciju</a></li>
-		</ul>
+		<div class="background-animation"></div>
+		<div class="container">
+			<div class="panel">
+				<section class="hero">
+					<img
+						class="logo"
+						src="app/logo.png"
+						alt="Taski Logo"
+					>
+					<h1>Taski Usluge</h1>
+					<p class="subtitle">
+						Pristupite sistemu za Taski Usluge putem Windows, Android ili Web platforme.
+					</p>
+				</section>
+				<section class="cards">
+					<a
+						class="card"
+						href="https://github.com/taski1995/taski1995.github.io/raw/refs/heads/main/installer/TaskiUsluge_Installer_Win32-x64.exe"
+						rel="noopener noreferrer"
+					>
+						<div class="icon">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M2 3.5L11 2v9H2V3.5zm10 8h10V1L12 2.5v9zM2 12h9v9L2 19.5V12zm10 0h10v10l-10-1.5V12z"/>
+							</svg>
+						</div>
+						<h2>Windows aplikacija</h2>
+						<p>
+							Preuzmite instalacioni paket za Windows računar.
+						</p>
+						<span class="button">
+							Preuzmi
+						</span>
+					</a>
+					<a
+						class="card"
+						href="installer/TaskiUsluge_Installer_Android.apk"
+						rel="noopener noreferrer"
+					>
+						<div class="icon">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M7.2 8h9.6a4.8 4.8 0 0 1 4.8 4.8v5.2a2 2 0 0 1-2 2h-1v2a1.5 1.5 0 1 1-3 0v-2h-7.2v2a1.5 1.5 0 1 1-3 0v-2h-1a2 2 0 0 1-2-2v-5.2A4.8 4.8 0 0 1 7.2 8zm1.4-2.8L7.2 3.8l.7-.7 1.5 1.5A7.7 7.7 0 0 1 12 4.1c.9 0 1.8.1 2.6.5l1.5-1.5.7.7-1.4 1.4A4.8 4.8 0 0 1 18 8H6a4.8 4.8 0 0 1 2.6-2.8zM9 13a.9.9 0 1 0 0-1.8.9.9 0 0 0 0 1.8zm6 0a.9.9 0 1 0 0-1.8.9.9 0 0 0 0 1.8z"/>
+							</svg>
+						</div>
+						<h2>Android aplikacija</h2>
+						<p>
+							Preuzmite APK paket za Android uređaje.
+						</p>
+						<span class="button">
+							Preuzmi
+						</span>
+					</a>
+					<a
+						class="card"
+						href="app"
+						rel="noopener noreferrer"
+					>
+						<div class="icon">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.9 9h-3.1a16.4 16.4 0 00-1.4-5A8.03 8.03 0 0118.9 11zM12 4.1c1.2 1.4 2.1 4 2.4 6.9H9.6c.3-2.9 1.2-5.5 2.4-6.9zM4.1 13h3.1a16.4 16.4 0 001.4 5A8.03 8.03 0 014.1 13zm3.1-2H4.1A8.03 8.03 0 018.6 6a16.4 16.4 0 00-1.4 5zm4.8 8.9c-1.2-1.4-2.1-4-2.4-6.9h4.8c-.3 2.9-1.2 5.5-2.4 6.9zm2.8-1.9a16.4 16.4 0 001.4-5h3.1a8.03 8.03 0 01-4.5 5z"/>
+							</svg>
+						</div>
+						<h2>Web aplikacija</h2>
+						<p>
+							Pristupite aplikaciji direktno iz internet pregledača.
+						</p>
+						<span class="button">
+							Otvori
+						</span>
+					</a>
+				</section>
+				<div class="footer">
+					Taski • Pristupna stranica za Taski Usluge
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
