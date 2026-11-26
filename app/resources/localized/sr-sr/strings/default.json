@@ -1,8 +1,10 @@
 {
 	"Taski.Services.Title": "Taski Usluge",
-	"Taski.Services.Welcome": "Dobrodošli",
-	"Taski.Services.LoginPage.Username": "Korisničko ime",
-	"Taski.Services.LoginPage.Password": "Lozinka",
-	"Taski.Services.LoginPage.RememberMe": "Zapamti me",
-	"Taski.Services.LoginPage.SignIn": "Prijavi se"
+	"Taski.Services.LoginComponent.Welcome": "Dobrodošli",
+	"Taski.Services.LoginComponent.Continue": "Prijavite se za nastavak",
+	"Taski.Services.LoginComponent.Username": "Korisničko ime",
+	"Taski.Services.LoginComponent.Password": "Lozinka",
+	"Taski.Services.LoginComponent.PasswordVisibilityAria": "Menjaj vidljivost lozinke",
+	"Taski.Services.LoginComponent.RememberMe": "Zapamti me",
+	"Taski.Services.LoginComponent.SignIn": "Prijavi se"
 }

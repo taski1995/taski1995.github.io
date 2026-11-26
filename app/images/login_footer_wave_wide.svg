@@ -1,0 +1,40 @@
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 54 1920 141"
+	preserveAspectRatio="none"
+>
+	<defs>
+		<linearGradient
+			id="footerGradient"
+			x1="0%"
+			y1="100%"
+			x2="100%"
+			y2="0%"
+		>
+			<stop offset="0%" stop-color="#DCE3F3"/>
+			<stop offset="40%" stop-color="#BECBEA"/>
+			<stop offset="75%" stop-color="#CCD6EE"/>
+			<stop offset="100%" stop-color="#DCE3F3"/>
+		</linearGradient>
+	</defs>
+
+	<path
+		fill="url(#footerGradient)"
+		d=
+		"
+			M0,120
+
+			C350,0
+			700,160
+			1100,120
+
+			C1400,100
+			1650,27
+			1920,65
+
+			L1920,195
+			L0,195
+			Z
+		"
+	/>
+</svg>

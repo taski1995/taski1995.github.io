@@ -1,8 +1,10 @@
 {
 	"Taski.Services.Title": "Taski Services",
-	"Taski.Services.Welcome": "Welcome",
-	"Taski.Services.LoginPage.Username": "Username",
-	"Taski.Services.LoginPage.Password": "Password",
-	"Taski.Services.LoginPage.RememberMe": "Remember me",
-	"Taski.Services.LoginPage.SignIn": "Sign in"
+	"Taski.Services.LoginComponent.Welcome": "Welcome",
+	"Taski.Services.LoginComponent.Continue": "Sign in to continue",
+	"Taski.Services.LoginComponent.Username": "Username",
+	"Taski.Services.LoginComponent.Password": "Password",
+	"Taski.Services.LoginComponent.PasswordVisibilityAria": "Toggle password visibility",
+	"Taski.Services.LoginComponent.RememberMe": "Remember me",
+	"Taski.Services.LoginComponent.SignIn": "Sign in"
 }
